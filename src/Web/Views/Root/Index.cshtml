@@ -3,6 +3,27 @@
 @{
     ViewBag.Title = "Uploader 5000";
 }
-
-<h2>Uploader 5000</h2>
-<p>Hello Upload!</p>
+<div class="hero-unit">
+    <h1>Uploader 5000</h1>
+    <p>Hello Upload!</p>
+    <div id="images" class="carousel slide">
+        <div class="carousel-inner">
+            <div class="item">
+                <img src="@Url.Content("~/Content/Images/d63ab745-4278-4f2b-942a-55cba8a3e4cf/Fruit_F.png")" />
+            </div>
+        </div>
+        <p>
+            <a id="Next" class="btn btn-primary btn-large" href="#images" data-slide="next">
+                Next &raquo;</a>
+        </p>
+    </div>
+</div>
+<script type="text/javascript" src="@Url.Content("~/Content/bootstrap/js/bootstrap-carousel.js")"></script>
+<script type="text/javascript">
+    $(function () {
+        $('#images .carousel-inner .item:first-child').addClass("active");
+        $('#images').carousel({
+            interval: 4000
+        });
+    });
+</script>
