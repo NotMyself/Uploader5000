@@ -56,7 +56,11 @@
     <Compile Include="Controllers\ImagesController_Tests.cs" />
     <Compile Include="Controllers\RootController_Tests.cs" />
     <Compile Include="Helpers\Capture.cs" />
+    <Compile Include="Helpers\Fakes\FakeHttpPostedFile.cs" />
     <Compile Include="Helpers\Fakes\FakeImageProcessor.cs" />
+    <Compile Include="Helpers\Fakes\FakePollingFileManager.cs" />
+    <Compile Include="Helpers\Fakes\FakeQueryFileManager.cs" />
+    <Compile Include="Helpers\Fakes\FakeUploadFileManager.cs" />
     <Compile Include="Helpers\RouteHelpers.cs" />
     <Compile Include="Helpers\SpecFor`T.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

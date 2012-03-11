@@ -75,7 +75,7 @@
 	var processProgress = 50;
 	function pollForProcess(fileId) {
 		$.smartPoller(1000, function (retry) {
-			$.getJSON("Image/" + fileId, function (data) {
+		    $.getJSON("ImageStatus/" + fileId, function (data) {
 				if (data.IsFinished) {
 					showImage(data);
 				} else {

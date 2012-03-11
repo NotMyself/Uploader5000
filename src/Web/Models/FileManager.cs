@@ -16,17 +16,21 @@ namespace Web.Models
     public class FileManager
     {
         private readonly string path;
+        private readonly string processedPath;
+        private readonly string processingPath;
 
         public FileManager(string path)
         {
             this.path = path;
+            processedPath = Path.Combine(this.path, "Processed");
+            processingPath = Path.Combine(this.path, "Processing");
         }
 
         public virtual Guid SaveForProcessing(HttpPostedFileBase file)
         {
             var fileName = Path.GetFileName(file.FileName);
             var fileId = Guid.NewGuid();
-            var path = Path.Combine(Path.Combine(this.path, "Processing"), fileId.ToString());
+            var path = Path.Combine(processingPath, fileId.ToString());
             Directory.CreateDirectory(path);
             file.SaveAs(Path.Combine(path, fileName));
 
@@ -35,7 +39,7 @@ namespace Web.Models
 
         public virtual ProcessedImageResult HasProcessed(string fileId)
         {
-            var path = Path.Combine(this.path, "Processed");
+            var path = processedPath;
             var directories = Directory.GetDirectories(path);
             if (directories.Any(x => x.EndsWith(fileId)))
             {
@@ -51,11 +55,13 @@ namespace Web.Models
 
         public virtual IEnumerable<ProcessedImageResult> GetProcessed()
         {
-            return new[] {new ProcessedImageResult
-                              {
-                                  IsFinished = true, 
-                                  ImagePath = "d63ab745-4278-4f2b-942a-55cba8a3e4cf/Fruit_F.png"
-                              }};
+            return from directory in Directory.GetDirectories(processedPath)
+                      let file = Directory.GetFiles(directory).Single()
+                      select new ProcessedImageResult
+                                 {
+                                     IsFinished = true, 
+                                     ImagePath = file.Replace(processedPath, string.Empty)
+                                 };
         }
     }
 }

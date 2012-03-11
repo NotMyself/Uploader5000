@@ -25,13 +25,14 @@ namespace Web.Controllers
             return View(images);
         }
 
-        [HttpPost]
+        [HttpPost, JsonError]
         public ActionResult Upload(HttpPostedFileBase file)
         {
             var fileId = getFileManager().SaveForProcessing(file);
             return new JsonResult {Data = fileId.ToString()};
         }
-  
+
+        [JsonError]
         public ActionResult ImageStatus(string fileId)
         {
             var image = getFileManager().HasProcessed(fileId);

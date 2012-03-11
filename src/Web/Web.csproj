@@ -62,6 +62,7 @@
     <Compile Include="..\ProjectInfo.cs">
       <Link>ProjectInfo.cs</Link>
     </Compile>
+    <Compile Include="Controllers\JsonError.cs" />
     <Compile Include="Controllers\ImagesController.cs" />
     <Compile Include="Controllers\RootController.cs" />
     <Compile Include="Global.asax.cs">
