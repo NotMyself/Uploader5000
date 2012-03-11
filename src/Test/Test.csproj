@@ -63,6 +63,7 @@
     <Compile Include="Helpers\Fakes\FakeUploadFileManager.cs" />
     <Compile Include="Helpers\RouteHelpers.cs" />
     <Compile Include="Helpers\SpecFor`T.cs" />
+    <Compile Include="Models\FileManager_Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reality_Tests.cs" />
     <Compile Include="Route_Tests.cs" />
@@ -75,6 +76,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Images\Processed\46b9c878-e7e0-4f80-a441-c93694b0c210\12846515.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Processed\76b1c3cd-5e49-44b6-a45b-9d37fe03faaf\36873290668879297_sADrqeLW.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Processed\d63ab745-4278-4f2b-942a-55cba8a3e4cf\Fruit_F.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Processing\46b9c878-e7e0-4f80-a441-c93694b0c210\12846515.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

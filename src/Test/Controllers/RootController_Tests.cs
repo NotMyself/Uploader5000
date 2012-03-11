@@ -57,7 +57,7 @@ namespace Test.Controllers
         public override void Context()
         {
             path = "C:\\somepath\\somewhere";
-            file = new FakeHttpPostedFile();
+            file = new FakeHttpPostedFile("somefile.png");
             subject = new RootController
                           {
                               GetImagesPath = () => path,

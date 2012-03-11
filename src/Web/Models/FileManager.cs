@@ -15,22 +15,23 @@ namespace Web.Models
 
     public class FileManager
     {
-        private readonly string path;
+        private const string ProcessedFolder = "Processed";
+        public const string ProcessingFolder = "Processing";
         private readonly string processedPath;
         private readonly string processingPath;
 
         public FileManager(string path)
-        {
-            this.path = path;
-            processedPath = Path.Combine(this.path, "Processed");
-            processingPath = Path.Combine(this.path, "Processing");
+        {   
+            processedPath = Path.Combine(path, ProcessedFolder);
+            processingPath = Path.Combine(path, ProcessingFolder);
         }
 
         public virtual Guid SaveForProcessing(HttpPostedFileBase file)
         {
-            var fileName = Path.GetFileName(file.FileName);
             var fileId = Guid.NewGuid();
+            var fileName = Path.GetFileName(file.FileName);
             var path = Path.Combine(processingPath, fileId.ToString());
+            
             Directory.CreateDirectory(path);
             file.SaveAs(Path.Combine(path, fileName));
 
@@ -39,18 +40,15 @@ namespace Web.Models
 
         public virtual ProcessedImageResult HasProcessed(string fileId)
         {
-            var path = processedPath;
-            var directories = Directory.GetDirectories(path);
-            if (directories.Any(x => x.EndsWith(fileId)))
-            {
-                var file = Directory.GetFiles(directories.First(x => x.EndsWith(fileId))).Single();
-                path = string.Format("/Content/Images/Processed/{0}/{1}", fileId, Path.GetFileName(file));
-            }
-            return new ProcessedImageResult
-            {
-                IsFinished = directories.Any(x => x.EndsWith(fileId)),
-                ImagePath = path
-            };
+            var results = from directory in Directory.GetDirectories(processedPath)
+                          where directory.EndsWith(fileId)
+                          let file = Directory.GetFiles(directory).Single()
+                          select new ProcessedImageResult
+                                     {
+                                         IsFinished = true,
+                                         ImagePath = file.Replace(processedPath, string.Empty)
+                                     };
+            return results.SingleOrDefault() ?? new ProcessedImageResult { ImagePath = string.Empty };
         }
 
         public virtual IEnumerable<ProcessedImageResult> GetProcessed()
