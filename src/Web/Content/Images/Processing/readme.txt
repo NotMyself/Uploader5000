@@ -1,1 +1,0 @@
-﻿This folder should generally be empty.
