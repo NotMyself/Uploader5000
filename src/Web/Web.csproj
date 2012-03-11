@@ -78,7 +78,11 @@
     <Content Include="Content\bootstrap\js\bootstrap-carousel.js" />
     <Content Include="Content\bootstrap\js\bootstrap.js" />
     <Content Include="Content\bootstrap\js\bootstrap.min.js" />
-    <Content Include="Content\Images\d63ab745-4278-4f2b-942a-55cba8a3e4cf\Fruit_F.png" />
+    <Content Include="Content\Images\Processed\d63ab745-4278-4f2b-942a-55cba8a3e4cf\Fruit_F.png" />
+    <Content Include="Content\Scripts\jquery.smartpoller.js" />
+    <Content Include="Content\Scripts\jquery.fileupload.js" />
+    <Content Include="Content\Scripts\jquery.iframe-transport.js" />
+    <Content Include="Content\Scripts\jquery.ui.widget.js" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\Scripts\modernizr-1.7.js" />
@@ -90,6 +94,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Content\Images\Processing\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

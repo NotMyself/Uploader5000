@@ -20,7 +20,8 @@ namespace Web
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
+            routes.MapRoute("Upload", "Upload", new {controller = "Root", action = "Upload"});
+            routes.MapRoute("Image", "Image/{fileId}", new {controller = "Root", action = "Image"});
             routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters
