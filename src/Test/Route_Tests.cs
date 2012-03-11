@@ -6,6 +6,8 @@ using Web.Controllers;
 
 namespace Test
 {
+    // ReSharper disable InconsistentNaming
+
     [TestFixture]
     public class Route_Tests
     {
@@ -35,7 +37,13 @@ namespace Test
         [Test]
         public void image_should_route_to_root_controller_image_action()
         {
-            "~/Image/some-file-id".ShouldMapTo<RootController>(x => x.Image("some-file-id"));
+            "~/ImageStatus/some-file-id".ShouldMapTo<RootController>(x => x.ImageStatus("some-file-id"));
+        }
+
+        [Test]
+        public void images_process_should_route_to_images_controller_process_action()
+        {
+            "~/Images/Process".ShouldMapTo<ImagesController>(x => x.Process());
         }
     }
 }

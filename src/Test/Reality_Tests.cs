@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Shouldly;
 
 namespace Test
 {
+    // ReSharper disable InconsistentNaming
+
     [TestFixture]
     public class Reality_Tests
     {

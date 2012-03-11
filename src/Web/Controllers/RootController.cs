@@ -4,50 +4,43 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Web.Models;
 
 namespace Web.Controllers
 {
     public class RootController : Controller
     {
+        public Func<string> GetImagesPath;
+        public Func<string,FileManager> GetFileManger; 
+     
+        public RootController()
+        {
+            GetImagesPath = () => Server.MapPath("~/Content/Images");
+            GetFileManger = path => new FileManager(path); 
+        }
+
         public ActionResult Index()
         {
-            return View();
+            var images = getFileManager().GetProcessed();
+            return View(images);
         }
 
         [HttpPost]
         public ActionResult Upload(HttpPostedFileBase file)
         {
-            var fileName = Path.GetFileName(file.FileName);
-            var fileId = Guid.NewGuid().ToString();
-            var path = Path.Combine(Server.MapPath("~/Content/Images/Processing"),fileId);
-            Directory.CreateDirectory(path);
-            file.SaveAs(Path.Combine(path, fileName));
-            
-            return new JsonResult {Data = new {fileId = fileId}};
+            var fileId = getFileManager().SaveForProcessing(file);
+            return new JsonResult {Data = fileId.ToString()};
         }
-
-        
-        public ActionResult Image(string fileId)
+  
+        public ActionResult ImageStatus(string fileId)
         {
-            var path = Server.MapPath("~/Content/Images/Processing");
-            var directories = Directory.GetDirectories(path);
-            if (directories.Any(x => x.EndsWith(fileId)))
-            {
-                var file = Directory.GetFiles(directories.First(x => x.EndsWith(fileId))).Single();
-                path = string.Format("/Content/Images/Processing/{0}/{1}", fileId, Path.GetFileName(file));
-            }
-            var imageResult = new ImagePollingResult
-                                  {
-                                      IsFinished = directories.Any(x => x.EndsWith(fileId)),
-                                      ImagePath = path
-                                  };
-            return Json(imageResult, JsonRequestBehavior.AllowGet);
+            var image = getFileManager().HasProcessed(fileId);
+            return Json(image, JsonRequestBehavior.AllowGet);
         }
-    }
-
-    class ImagePollingResult
-    {
-        public bool IsFinished { get; set; }
-        public string ImagePath { get; set; }
+        
+        private FileManager getFileManager()
+        {
+            return GetFileManger(GetImagesPath());
+        }
     }
 }
