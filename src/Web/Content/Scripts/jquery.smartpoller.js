@@ -32,7 +32,6 @@
             setTimeout(function () {
                 poller.call(this, startPoller)
             }, wait)
-            wait = wait * 1.5
         })()
     }
 })(jQuery);

@@ -75,7 +75,7 @@
 	var processProgress = 50;
 	function pollForProcess(fileId) {
 		$.smartPoller(1000, function (retry) {
-		    $.getJSON("ImageStatus/" + fileId, function (data) {
+			$.getJSON("ImageStatus/" + fileId, function (data) {
 				if (data.IsFinished) {
 					showImage(data);
 				} else {
@@ -98,4 +98,13 @@
 		progress.css("width","100%");
 		progressbar.removeClass('progress-info').addClass('progress-success');
 	}
+
+	//ghetto cron: id much rather have a background service or cron doing this
+	//but this will work for now.
+	$.smartPoller(5000, function (retry) {
+	    $.get("Images/Process", function () {
+	        retry();
+	    });
+
+	});
 </script>
