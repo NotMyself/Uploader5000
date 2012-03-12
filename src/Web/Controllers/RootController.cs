@@ -27,10 +27,11 @@ namespace Web.Controllers
         }
 
         [HttpPost, JsonError]
-        public ActionResult Upload(HttpPostedFileBase file)
+        public JsonResult Upload(HttpPostedFileBase file)
         {
             var fileId = getFileManager().SaveForProcessing(file);
-            return new JsonResult {Data = fileId.ToString()};
+
+            return Json(new { FileId = fileId.ToString() }, "text/plain", System.Text.Encoding.UTF8);
         }
 
         [JsonError]

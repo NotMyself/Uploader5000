@@ -16,11 +16,11 @@ namespace Web.Controllers
             GetImagesPath = () => Server.MapPath("~/Content/Images");
         }
 
-        public ActionResult Process()
+        public JsonResult Process()
         {
             Processor.Process(GetImagesPath());
-            
-            return new HttpStatusCodeResult(200);
+
+            return Json("OK", "text/plain", JsonRequestBehavior.AllowGet);
         }
 
     }

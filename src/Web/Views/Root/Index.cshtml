@@ -4,7 +4,7 @@
 	ViewBag.Title = "Uploader 5000";
 }
 <div class="hero-unit">
-    <h1>The Amazing Image Uploader 5000</h1>
+	<h1>The Amazing Image Uploader 5000</h1>
 </div>
 <div class="row detail-unit">
 	<div class="span6">
@@ -58,7 +58,7 @@
 			dataType: 'json',
 			url: 'Upload',
 			done: function (e, data) {
-				pollForProcess(data.result);
+				pollForProcess(data.result.FileId);
 			},
 			error: function () {
 				progressbar.removeClass('progress-info').addClass('progress-error');
@@ -75,22 +75,28 @@
 	});
 	var processProgress = 50;
 	function pollForProcess(fileId) {
-		$.smartPoller(1000, function (retry) {
-			$.getJSON("ImageStatus/" + fileId, function (data) {
-				if (data.IsFinished) {
-					showImage(data);
-				} else {
-					retry();
-					processProgress = processProgress + 10;
-					if (processProgress > 95)
-						processProgress = 60;
-					progress.css('width', processProgress + "%");
-				}
-			}).error(function() {
-				progressbar.removeClass('progress-info').addClass('progress-error');
-				progress.css('width', "100%");
-			});
-		});
+	    $.smartPoller(1000, function(retry) {
+	        $.ajax({
+	            url: "ImageStatus/" + fileId,
+	            dataType: 'json',
+	            cache: false,
+	            success: function(data) {
+	                if (data.IsFinished) {
+	                    showImage(data);
+	                } else {
+	                    retry();
+	                    processProgress = processProgress + 10;
+	                    if (processProgress > 95)
+	                        processProgress = 60;
+	                    progress.css('width', processProgress + "%");
+	                }
+	            },
+	            error: function() {
+	                progressbar.removeClass('progress-info').addClass('progress-error');
+	                progress.css('width', "100%");
+	            }
+	        });
+	    });
 	}
 
 	function showImage(image) {
@@ -103,9 +109,12 @@
 	//ghetto cron: id much rather have a background service or cron doing this
 	//but this will work for now.
 	$.smartPoller(5000, function (retry) {
-	    $.get("Images/Process", function () {
-	        retry();
+	    $.ajax({
+	        url: "Images/Process",
+	        cache:false,
+	        success:function () {
+	            retry();
+	        }
 	    });
-
 	});
 </script>

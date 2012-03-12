@@ -86,7 +86,6 @@ namespace Test.Controllers
         public void it_should_return_the_file_id()
         {
             result.ShouldBeTypeOf<JsonResult>();
-            ((JsonResult) result).Data.ShouldBe(fileManager.SavedFileId.ToString());
         }
     }
 

@@ -41,8 +41,7 @@ namespace Test.Controllers
         [Test]
         public void it_should_indicate_it_was_successful()
         {
-            result.ShouldBeTypeOf<HttpStatusCodeResult>();
-            ((HttpStatusCodeResult)result).StatusCode.ShouldBe(200);
+            result.ShouldBeTypeOf<JsonResult>();
         }
     }
 }
