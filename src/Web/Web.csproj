@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ImageResizer">
+      <HintPath>..\..\packages\ImageResizer.3.1.5\lib\ImageResizer.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -62,14 +65,16 @@
     <Compile Include="..\ProjectInfo.cs">
       <Link>ProjectInfo.cs</Link>
     </Compile>
-    <Compile Include="Controllers\JsonError.cs" />
+    <Compile Include="Helpers\JsonError.cs" />
     <Compile Include="Controllers\ImagesController.cs" />
     <Compile Include="Controllers\RootController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\EnumerableExtensions.cs" />
     <Compile Include="Models\FileManager.cs" />
     <Compile Include="Models\ImageProcessor.cs" />
+    <Compile Include="Models\ProcessPaths.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

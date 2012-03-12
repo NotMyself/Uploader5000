@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
-using Web.Controllers;
 
 namespace Web.Models
 {
@@ -15,15 +14,13 @@ namespace Web.Models
 
     public class FileManager
     {
-        private const string ProcessedFolder = "Processed";
-        public const string ProcessingFolder = "Processing";
         private readonly string processedPath;
         private readonly string processingPath;
 
         public FileManager(string path)
         {   
-            processedPath = Path.Combine(path, ProcessedFolder);
-            processingPath = Path.Combine(path, ProcessingFolder);
+            processedPath = Path.Combine(path, ProcessPaths.ProcessedFolder);
+            processingPath = Path.Combine(path, ProcessPaths.ProcessingFolder);
         }
 
         public virtual Guid SaveForProcessing(HttpPostedFileBase file)
@@ -42,11 +39,11 @@ namespace Web.Models
         {
             var results = from directory in Directory.GetDirectories(processedPath)
                           where directory.EndsWith(fileId)
-                          let file = Directory.GetFiles(directory).Single()
+                          let file = Directory.GetFiles(directory).Single().Replace(processedPath, string.Empty)
                           select new ProcessedImageResult
                                      {
                                          IsFinished = true,
-                                         ImagePath = file.Replace(processedPath, string.Empty)
+                                         ImagePath = string.Format("/Content/Images/Processed/{0}", file)
                                      };
             return results.SingleOrDefault() ?? new ProcessedImageResult { ImagePath = string.Empty };
         }
@@ -54,11 +51,11 @@ namespace Web.Models
         public virtual IEnumerable<ProcessedImageResult> GetProcessed()
         {
             return from directory in Directory.GetDirectories(processedPath)
-                      let file = Directory.GetFiles(directory).Single()
+                   let file = Directory.GetFiles(directory).Single().Replace(processedPath, string.Empty)
                       select new ProcessedImageResult
                                  {
-                                     IsFinished = true, 
-                                     ImagePath = file.Replace(processedPath, string.Empty)
+                                     IsFinished = true,
+                                     ImagePath = string.Format("/Content/Images/Processed/{0}", file)
                                  };
         }
     }

@@ -39,6 +39,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -64,6 +65,7 @@
     <Compile Include="Helpers\RouteHelpers.cs" />
     <Compile Include="Helpers\SpecFor`T.cs" />
     <Compile Include="Models\FileManager_Tests.cs" />
+    <Compile Include="Models\ImageProcessor_Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reality_Tests.cs" />
     <Compile Include="Route_Tests.cs" />
@@ -79,16 +81,25 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="Images\Processed\46b9c878-e7e0-4f80-a441-c93694b0c210\12846515.jpg">
+    <Content Include="Images\FileManager\Processed\46b9c878-e7e0-4f80-a441-c93694b0c210\12846515.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Processed\76b1c3cd-5e49-44b6-a45b-9d37fe03faaf\36873290668879297_sADrqeLW.jpg">
+    <Content Include="Images\FileManager\Processed\76b1c3cd-5e49-44b6-a45b-9d37fe03faaf\36873290668879297_sADrqeLW.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Processed\d63ab745-4278-4f2b-942a-55cba8a3e4cf\Fruit_F.png">
+    <Content Include="Images\FileManager\Processed\d63ab745-4278-4f2b-942a-55cba8a3e4cf\Fruit_F.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Processing\46b9c878-e7e0-4f80-a441-c93694b0c210\12846515.jpg">
+    <Content Include="Images\FileManager\Processing\46b9c878-e7e0-4f80-a441-c93694b0c212\12846515.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\ImageProcessor\ImageOk\Start\46b9c878-e7e0-4f80-a441-c93694b0c212\ImageOk.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\ImageProcessor\ImageToTall\Start\46b9c878-e7e0-4f80-a441-c93694b0c212\ImageToTall.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\ImageProcessor\ImageToWide\Start\46b9c878-e7e0-4f80-a441-c93694b0c212\ImageToWide.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

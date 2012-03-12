@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace Web.Controllers
+namespace Web.Helpers
 {
     public class JsonError : FilterAttribute, IExceptionFilter
     {

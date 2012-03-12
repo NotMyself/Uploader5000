@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using NUnit.Framework;
 using Shouldly;
 using Test.Helpers;
@@ -11,6 +10,8 @@ using Web.Models;
 
 namespace Test.Models
 {
+    // ReSharper disable InconsistentNaming
+
     [TestFixture]
     public class when_I_get_processed_images : SpecFor<FileManager>
     {
@@ -19,7 +20,7 @@ namespace Test.Models
 
         public override void Context()
         {
-            processedImagesPath = Path.Combine(TestContext.CurrentContext.TestDirectory, "Images");
+            processedImagesPath = Path.Combine(TestContext.CurrentContext.TestDirectory, "Images\\FileManager");
             subject = new FileManager(processedImagesPath);
         }
 
@@ -56,7 +57,7 @@ namespace Test.Models
 
         public override void Context()
         {
-            processedImagesPath = Path.Combine(TestContext.CurrentContext.TestDirectory, "Images");
+            processedImagesPath = Path.Combine(TestContext.CurrentContext.TestDirectory, "Images\\FileManager");
             fileId = "46b9c878-e7e0-4f80-a441-c93694b0c210";
             subject = new FileManager(processedImagesPath);
         }
@@ -88,7 +89,7 @@ namespace Test.Models
 
         public override void Context()
         {
-            processedImagesPath = Path.Combine(TestContext.CurrentContext.TestDirectory, "Images");
+            processedImagesPath = Path.Combine(TestContext.CurrentContext.TestDirectory, "Images\\FileManager");
             fileId = "some-unprocessed-file-id";
             subject = new FileManager(processedImagesPath);
         }
@@ -139,13 +140,13 @@ namespace Test.Models
         [Test]
         public void it_should_create_a_folder_for_the_image()
         {
-            Directory.Exists(Path.Combine(processedImagesPath, FileManager.ProcessingFolder, result.ToString())).ShouldBe(true);
+            Directory.Exists(Path.Combine(processedImagesPath, ProcessPaths.ProcessingFolder, result.ToString())).ShouldBe(true);
         }
 
         [Test]
         public void it_should_save_the_file_to_the_processing_folder()
         {
-            file.SavedAsPath.ShouldBe(Path.Combine(processedImagesPath,FileManager.ProcessingFolder, result.ToString(), file.FileName));
+            file.SavedAsPath.ShouldBe(Path.Combine(processedImagesPath,ProcessPaths.ProcessingFolder, result.ToString(), file.FileName));
         }
     }
 }
